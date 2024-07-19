@@ -5,6 +5,7 @@ from peft import PeftModel
 import pandas as pd
 import logging
 import torch
+from huggingface_hub import login
 
 class HuggingfaceBatchSerial(InferenceStrategy):
 
@@ -22,6 +23,7 @@ class HuggingfaceBatchSerial(InferenceStrategy):
         logging.basicConfig(filename=logging_path+".log", level=logging.INFO)
 
         ## Model inference by creating tokenizer and model object
+        login(token = "your hf token")
         device_map = "auto"
         tokenizer = AutoTokenizer.from_pretrained(expertConfig["base_model"])
         model = None
